@@ -1,138 +1,53 @@
-const form = document.getElementById("medicineForm");
-const tableBody = document.getElementById("medicineTableBody");
+document.addEventListener("DOMContentLoaded", () => {
 
-let medicines =
-JSON.parse(localStorage.getItem("medicines")) || [];
+    const form = document.getElementById("medicineForm");
+    const tableBody = document.getElementById("tableBody");
 
-displayMedicines();
+    // Load data
+    loadMedicines();
 
-form.addEventListener("submit", function(e){
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    e.preventDefault();
+        const data = {
+            name: document.getElementById("name").value,
+            dosage: document.getElementById("dosage").value,
+            time: document.getElementById("time").value,
+            frequency: document.getElementById("frequency").value
+        };
 
-    const medicine = {
-        id: Date.now(),
-        name: form.medicine_name.value,
-        dosage: form.dosage.value,
-        time: form.reminder_time.value,
-        frequency: form.frequency.value,
-        status: "Pending"
-    };
-
-    medicines.push(medicine);
-
-    localStorage.setItem(
-        "medicines",
-        JSON.stringify(medicines)
-    );
-
-    displayMedicines();
-
-    form.reset();
-});
-
-function displayMedicines(){
-
-    tableBody.innerHTML = "";
-
-    medicines.forEach((medicine)=>{
-
-        let row = document.createElement("tr");
-
-        row.innerHTML = `
-            <td>${medicine.name}</td>
-            <td>${medicine.dosage}</td>
-            <td>${medicine.time}</td>
-
-            <td class="${
-                medicine.status === "Taken"
-                ? "taken"
-                : "pending"
-            }">
-                ${medicine.status}
-            </td>
-
-            <td>
-                <button onclick="markTaken(${medicine.id})">
-                    Taken
-                </button>
-
-                <button
-                    class="delete-btn"
-                    onclick="deleteMedicine(${medicine.id})">
-                    Delete
-                </button>
-            </td>
-        `;
-
-        tableBody.appendChild(row);
-    });
-}
-
-function markTaken(id){
-
-    medicines.forEach((medicine)=>{
-
-        if(medicine.id === id){
-            medicine.status = "Taken";
-        }
-    });
-
-    localStorage.setItem(
-        "medicines",
-        JSON.stringify(medicines)
-    );
-
-    displayMedicines();
-}
-
-function deleteMedicine(id){
-
-    medicines = medicines.filter(
-        medicine => medicine.id !== id
-    );
-
-    localStorage.setItem(
-        "medicines",
-        JSON.stringify(medicines)
-    );
-
-    displayMedicines();
-}
-
-/* Browser Notification Reminder */
-
-if ("Notification" in window) {
-
-    Notification.requestPermission();
-
-    setInterval(() => {
-
-        const now = new Date();
-
-        const currentTime =
-            String(now.getHours()).padStart(2, "0")
-            + ":" +
-            String(now.getMinutes()).padStart(2, "0");
-
-        medicines.forEach((medicine) => {
-
-            if (
-                medicine.time === currentTime &&
-                medicine.status === "Pending"
-            ) {
-
-                new Notification(
-                    "💊 Medicine Reminder",
-                    {
-                        body:
-                        "Time to take " +
-                        medicine.name
-                    }
-                );
-            }
-
+        await fetch("/add_medicine", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         });
 
-    }, 60000);
-}
+        form.reset();
+        loadMedicines();
+    });
+
+    async function loadMedicines() {
+        const res = await fetch("/get_medicines");
+        const data = await res.json();
+
+        tableBody.innerHTML = "";
+
+        data.forEach(med => {
+            const row = `
+                <tr>
+                    <td>${med.name}</td>
+                    <td>${med.dosage}</td>
+                    <td>${med.time}</td>
+                    <td>${med.frequency}</td>
+                    <td>
+                        <a href="/delete/${med.id}">Delete</a>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+    }
+
+});
