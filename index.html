@@ -1,22 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Medicine Reminder</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>Medicine Reminder & Health Tracker</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 
 <body>
 
-<div class="container">
+<header>
+    <div class="logo">
+        <i class="fas fa-heartbeat"></i>
+        <h2>Health Tracker</h2>
+    </div>
 
-    <h1>💊 Medicine Reminder</h1>
+    <button id="darkModeBtn">🌙</button>
+</header>
+
+<section class="hero">
+    <h1>💊 Medicine Reminder & Health Tracker</h1>
+    <p>Never miss your medicines and stay healthy.</p>
+</section>
+
+<section class="dashboard">
 
     <div class="card">
+        <h3 id="totalMedicines">0</h3>
+        <p>Total Medicines</p>
+    </div>
+
+    <div class="card">
+        <h3 id="takenMedicines">0</h3>
+        <p>Taken</p>
+    </div>
+
+    <div class="card">
+        <h3 id="pendingMedicines">0</h3>
+        <p>Pending</p>
+    </div>
+
+</section>
+
+<section class="form-section">
+
+    <div class="form-card">
+
+        <h2>Add Medicine</h2>
 
         <form id="medicineForm">
 
-            <input type="text" id="name" placeholder="Medicine Name" required>
-            <input type="text" id="dosage" placeholder="Dosage" required>
-            <input type="time" id="time" required>
+            <input type="text"
+                   id="name"
+                   placeholder="Medicine Name"
+                   required>
+
+            <input type="text"
+                   id="dosage"
+                   placeholder="Dosage"
+                   required>
+
+            <input type="time"
+                   id="time"
+                   required>
+
+            <select id="category">
+                <option>Tablet</option>
+                <option>Capsule</option>
+                <option>Syrup</option>
+                <option>Injection</option>
+            </select>
+
+            <button type="submit">
+                Add Reminder
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<section class="table-section">
+
+    <h2>Medicine Schedule</h2>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Dosage</th>
+                <th>Time</th>
+                <th>Category</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="medicineTable">
+        </tbody>
+
+    </table>
+
+</section>
+
+<section class="tips-section">
+
+    <h2>💡 Health Tips</h2>
+
+    <div class="tips">
+
+        <div class="tip">Drink plenty of water daily.</div>
+
+        <div class="tip">Exercise for 30 minutes every day.</div>
+
+        <div class="tip">Never skip prescribed medication.</div>
+
+        <div class="tip">Get at least 7–8 hours of sleep.</div>
+
+    </div>
+
+</section>
+
+<footer>
+    <h3>Sri Rakshayarisha</h3>
+    <p>Developer | Medicine Reminder & Health Tracker</p>
+    <p>© 2026 All Rights Reserved</p>
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>
