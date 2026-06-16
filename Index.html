@@ -1,132 +1,22 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicine Reminder & Health Tracker</title>
+    <title>Medicine Reminder</title>
 
-```
-<!-- CSS File -->
-<link rel="stylesheet" href="style.css">
-```
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
 <div class="container">
 
-```
-<h1>💊 Medicine Reminder & Health Tracker</h1>
+    <h1>💊 Medicine Reminder</h1>
 
-<!-- Add Medicine Section -->
-<div class="card">
-    <h2>Add Medicine Reminder</h2>
+    <div class="card">
 
-    <form id="medicineForm">
+        <form id="medicineForm">
 
-        <div class="form-group">
-            <label for="medicine_name">Medicine Name</label>
-            <input
-                type="text"
-                id="medicine_name"
-                name="medicine_name"
-                placeholder="Enter medicine name"
-                required>
-        </div>
-
-        <div class="form-group">
-            <label for="dosage">Dosage</label>
-            <input
-                type="text"
-                id="dosage"
-                name="dosage"
-                placeholder="Example: 500mg"
-                required>
-        </div>
-
-        <div class="form-group">
-            <label for="reminder_time">Reminder Time</label>
-            <input
-                type="time"
-                id="reminder_time"
-                name="reminder_time"
-                required>
-        </div>
-
-        <div class="form-group">
-            <label for="frequency">Frequency</label>
-            <select id="frequency" name="frequency">
-                <option value="Daily">Daily</option>
-                <option value="Twice Daily">Twice Daily</option>
-                <option value="Weekly">Weekly</option>
-            </select>
-        </div>
-
-        <button type="submit">
-            Add Reminder
-        </button>
-
-    </form>
-</div>
-
-<!-- Health Tracker Section -->
-<div class="card">
-    <h2>Health Tracker</h2>
-
-    <div class="health-box">
-
-        <div class="form-group">
-            <label>Weight (kg)</label>
-            <input type="number" placeholder="Enter Weight">
-        </div>
-
-        <div class="form-group">
-            <label>Blood Pressure</label>
-            <input type="text" placeholder="120/80">
-        </div>
-
-        <div class="form-group">
-            <label>Blood Sugar (mg/dL)</label>
-            <input type="number" placeholder="Enter Blood Sugar">
-        </div>
-
-        <div class="form-group">
-            <label>Heart Rate (BPM)</label>
-            <input type="number" placeholder="Enter Heart Rate">
-        </div>
-
-    </div>
-</div>
-
-<!-- Medicine List -->
-<div class="card">
-    <h2>Today's Medicines</h2>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Medicine</th>
-                <th>Dosage</th>
-                <th>Time</th>
-                <th>Frequency</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody id="medicineTableBody">
-            <!-- JavaScript will add medicines here -->
-        </tbody>
-    </table>
-</div>
-```
-
-</div>
-
-<!-- JavaScript File -->
-
-<script src="script.js"></script>
-
-</body>
-</html>
+            <input type="text" id="name" placeholder="Medicine Name" required>
+            <input type="text" id="dosage" placeholder="Dosage" required>
+            <input type="time" id="time" required>
