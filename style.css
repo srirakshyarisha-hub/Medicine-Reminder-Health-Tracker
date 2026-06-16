@@ -1,35 +1,172 @@
-body {
-    font-family: Arial;
-    background: #f2f6ff;
-    text-align: center;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
 }
 
-.container {
-    width: 70%;
-    margin: auto;
+body{
+    background:#f4f7fc;
+    color:#333;
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
+header{
+    background:#0d6efd;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
 }
 
-input, select, button {
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-button {
-    background: blue;
-    color: white;
-    border: none;
-    cursor: pointer;
+.logo i{
+    font-size:28px;
 }
 
-table {
-    width: 100%;
-    margin-top: 20px;
+#darkModeBtn{
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.hero{
+    text-align:center;
+    padding:50px 20px;
+    background:linear-gradient(135deg,#0d6efd,#00b4d8);
+    color:white;
+}
+
+.hero h1{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    padding:30px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    font-size:32px;
+    color:#0d6efd;
+}
+
+.form-section{
+    padding:30px;
+}
+
+.form-card{
+    background:white;
+    max-width:700px;
+    margin:auto;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-card h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+input,select{
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+button{
+    padding:12px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+.table-section{
+    padding:30px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+table th,
+table td{
+    padding:15px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+table th{
+    background:#0d6efd;
+    color:white;
+}
+
+.tips-section{
+    padding:30px;
+}
+
+.tips{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.tip{
+    background:white;
+    padding:20px;
+    border-left:5px solid #0d6efd;
+    border-radius:10px;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#0d6efd;
+    color:white;
+    margin-top:30px;
+}
+
+.dark-mode{
+    background:#121212;
+    color:white;
+}
+
+.dark-mode .card,
+.dark-mode .form-card,
+.dark-mode .tip,
+.dark-mode table{
+    background:#1e1e1e;
+    color:white;
 }
