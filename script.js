@@ -1,10 +1,4 @@
-const medicineForm = document.getElementById("medicineForm");
-const medicineTable = document.getElementById("medicineTable");
-
-let medicines = [];
-
-medicineForm.addEventListener("submit", function(e){
-
+document.getElementById("medicineForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
     const name = document.getElementById("name").value;
@@ -12,45 +6,31 @@ medicineForm.addEventListener("submit", function(e){
     const time = document.getElementById("time").value;
     const category = document.getElementById("category").value;
 
-    medicines.push({
-        name,
-        dosage,
-        time,
-        category
-    });
+    const table = document.getElementById("medicineTable");
 
-    displayMedicines();
-
-    medicineForm.reset();
-});
-
-function displayMedicines(){
-
-    medicineTable.innerHTML = "";
-
-    medicines.forEach(medicine => {
-
-        medicineTable.innerHTML += `
+    const row = `
         <tr>
-            <td>${medicine.name}</td>
-            <td>${medicine.dosage}</td>
-            <td>${medicine.time}</td>
-            <td>${medicine.category}</td>
+            <td>${name}</td>
+            <td>${dosage}</td>
+            <td>${time}</td>
+            <td>${category}</td>
             <td>Pending</td>
         </tr>
-        `;
-    });
+    `;
+
+    table.innerHTML += row;
 
     document.getElementById("totalMedicines").innerText =
-    medicines.length;
+        table.rows.length;
 
     document.getElementById("pendingMedicines").innerText =
-    medicines.length;
+        table.rows.length;
 
-    document.getElementById("takenMedicines").innerText = 0;
-}
+    alert("Medicine Added Successfully!");
 
-document.getElementById("darkModeBtn")
-.addEventListener("click", () => {
+    this.reset();
+});
+
+document.getElementById("darkModeBtn").addEventListener("click", function() {
     document.body.classList.toggle("dark-mode");
 });
