@@ -1,53 +1,56 @@
-document.addEventListener("DOMContentLoaded", () => {
+const medicineForm = document.getElementById("medicineForm");
+const medicineTable = document.getElementById("medicineTable");
 
-    const form = document.getElementById("medicineForm");
-    const tableBody = document.getElementById("tableBody");
+let medicines = [];
 
-    // Load data
-    loadMedicines();
+medicineForm.addEventListener("submit", function(e){
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        const data = {
-            name: document.getElementById("name").value,
-            dosage: document.getElementById("dosage").value,
-            time: document.getElementById("time").value,
-            frequency: document.getElementById("frequency").value
-        };
+    const name = document.getElementById("name").value;
+    const dosage = document.getElementById("dosage").value;
+    const time = document.getElementById("time").value;
+    const category = document.getElementById("category").value;
 
-        await fetch("/add_medicine", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        form.reset();
-        loadMedicines();
+    medicines.push({
+        name,
+        dosage,
+        time,
+        category
     });
 
-    async function loadMedicines() {
-        const res = await fetch("/get_medicines");
-        const data = await res.json();
+    displayMedicines();
 
-        tableBody.innerHTML = "";
+    medicineForm.reset();
+});
 
-        data.forEach(med => {
-            const row = `
-                <tr>
-                    <td>${med.name}</td>
-                    <td>${med.dosage}</td>
-                    <td>${med.time}</td>
-                    <td>${med.frequency}</td>
-                    <td>
-                        <a href="/delete/${med.id}">Delete</a>
-                    </td>
-                </tr>
-            `;
-            tableBody.innerHTML += row;
-        });
-    }
+function displayMedicines(){
 
+    medicineTable.innerHTML = "";
+
+    medicines.forEach(medicine => {
+
+        medicineTable.innerHTML += `
+        <tr>
+            <td>${medicine.name}</td>
+            <td>${medicine.dosage}</td>
+            <td>${medicine.time}</td>
+            <td>${medicine.category}</td>
+            <td>Pending</td>
+        </tr>
+        `;
+    });
+
+    document.getElementById("totalMedicines").innerText =
+    medicines.length;
+
+    document.getElementById("pendingMedicines").innerText =
+    medicines.length;
+
+    document.getElementById("takenMedicines").innerText = 0;
+}
+
+document.getElementById("darkModeBtn")
+.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
 });
